@@ -1,0 +1,196 @@
+Final Alignment report  
+======================  
+Sequence pairs analysed in total:	308740573  
+Number of paired-end alignments with a unique best hit:	95208576  
+Mapping efficiency:	30.8%  
+
+Sequence pairs with no alignments under any condition:	156403212  
+Sequence pairs did not map uniquely:	57128785  
+Sequence pairs which were discarded because genomic sequence could not be extracted:	8094  
+ 
+Number of sequence pairs with unique best (first) alignment came from the bowtie output:  
+CT/GA/CT:	26777398	((converted) top strand)  
+GA/CT/CT:	20896883	(complementary to (converted) top strand)   
+GA/CT/GA:	20756441	(complementary to (converted) bottom strand)    
+CT/GA/GA:	26769760	((converted) bottom strand)  
+
+Final Cytosine Methylation Report
+=================================
+Total number of C's analysed:	3367107452  
+
+Total methylated C's in CpG context:	37052284  
+Total methylated C's in CHG context:	6444314  
+Total methylated C's in CHH context:	187840548  
+Total methylated C's in Unknown context:	4468626  
+
+Total unmethylated C's in CpG context:	450080521  
+Total unmethylated C's in CHG context:	663984989  
+Total unmethylated C's in CHH context:	2021704796  
+Total unmethylated C's in Unknown context:	12469925  
+
+C methylated in CpG context:	7.6%  
+C methylated in CHG context:	1.0%  
+C methylated in CHH context:	8.5%  
+C methylated in unknown context (CN or CHN):	26.4%  
+
+
+Bismark completed in 4d 13h 1m 5s
+
+====================
+Bismark run complete
+====================
+
+## Clean and filter aligned reads, call methylation stats 
+
+Use [MethylExtract](https://bioinfo2.ugr.es/MethylExtract/downloads/ManualMethylExtract.pdf) to filter out … 
+- sequencing errors   
+- bisulfite failures   
+- clonal reads (i.e. deduplicate)  
+- single nucleotide variants, and   
+- call methylation status/levels   
+
+Downloaded MethylKit version 1.9.1 using `conda install -c bioconda methylextract`, which is a set of perl scripts. The perl scripts were added to $PATH 
+
+! MethylExtract.pl 
+
+mkdir {workingdir}qc-processing/methylExtract/
+
+### MethylExtract options:
+
+Mandatory Parameters and my settings: 
+- `seq={workingdir}data/pilon_scaffolds.fasta` - path to reference genome fasta folder.
+- `inDir={workingdir}qc-processing/bismark/Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.bam` - path to SAM/BAM files.   
+- `flagW=99,147` - used tags in the SAM file for reads mapped on Watson strand (default 0 for single-end alignments). In case of pair-end reads, the user should use at least two tags comma-separated.       
+- `flagC=83,163` - used tags in the SAM file for reads mapped on Crick strand (default: 16 for single-end alignments). In case of pair-end reads, the user should use at least two tags comma-separated.   
+ 
+Optional Parameters that I will use:  
+- `delDup=Y`- activates detection of duplicated reads.  
+- `p=8` - use 8 threads  
+- `outDir={workingdir}qc-processing/methylExtract/  
+- `bedOut=Y` - extract methylation values in BED format  
+
+# Run methylextract 
+! MethylExtract.pl \
+seq={workingdir}data/pilon_scaffolds.fasta \
+inDir={workingdir}qc-processing/bismark/ \
+flagW=99,147 \
+flagC=83,163 \
+p=8 \
+outDir={workingdir}qc-processing/methylExtract/ \
+bedOut=Y
+
+! ls {workingdir}qc-processing/methylExtract/
+
+! cat {workingdir}qc-processing/methylExtract/RatiosCGStats.log
+
+! grep "Mean methylation" {workingdir}qc-processing/methylExtract/RatiosCGStats.log
+
+! head -n 25 {workingdir}qc-processing/methylExtract/CG.output
+
+## Summarized methylation rates in RMarkdown notebook [Notebook-02_Summarizing-meth](https://raw.githubusercontent.com/laurahspencer/C.magister_methyl-oa/master/notebooks/Notebook-02_Summarizing-meth.Rmd)
+
+NOTE: the MethylExtract output file [qc-processing/methylExtract/CG.output]({workingdir}qc-processing/methylExtract/CG.output) contains coverage and methylated reads per loci, and loci context (CG, various CN that represent SNVs). According to the MethylExtract log no duplicates were identified, but this might relate to the data being paired-end, which MethylExtract doesn't handle well. The manual suggests using Picard to identify and remove duplicates. 
+
+# Deduplicating and calling methylation: an alternative option using Bismark 
+
+The below code is based on the [Meth_Compare pipeline](https://github.com/hputnam/Meth_Compare/blob/master/analyses/Meth_Compare_Pipeline.md): 
+
+### Deduplicate
+
+From the Bismark user guide: 
+
+"Please note that for paired-end BAM files the deduplication script expects Read 1 and Read 2 to follow each other in consecutive lines! If the file has been sorted by position for whatever reason, please make sure that you resort it by read name first (e.g. using samtools sort -n)" 
+
+So, first check to see if .bam file is sorted. I'm testing it using `samtools index` - if it's not sorted there should be an error
+
+! samtools index {workingdir}qc-processing/bismark/Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.bam
+
+! Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.bam | \
+xargs basename -s .bam | \
+xargs -I{} ${workingdir}programs/Bismark-0.22.3/deduplicate_bismark \
+--bam \
+--paired \
+{}.bam
+
+
+### Extract methylation status 
+
+```
+${bismark_dir}/bismark_methylation_extractor \
+--bedGraph --counts --scaffolds \
+--multicore 14 \
+--buffer_size 75% \
+*deduplicated.bam
+```
+
+### Generate Bismark reports
+
+${bismark_dir}/bismark2report
+${bismark_dir}/bismark2summary
+
+
+### Sort files for methylkit and IGV
+
+find *deduplicated.bam | \
+xargs basename -s .bam | \
+xargs -I{} ${samtools} \
+sort --threads 28 {}.bam \
+-o {}.sorted.bam
+
+# Index sorted files for IGV
+# The "-@ 16" below specifies number of CPU threads to use.
+
+find *.sorted.bam | \
+xargs basename -s .sorted.bam | \
+xargs -I{} ${samtools} \
+index -@ 28 {}.sorted.bam
+
+
+genome_folder="/gscratch/srlab/sr320/data/froger/Mcap_Genome/"
+
+
+find *deduplicated.bismark.cov.gz \
+| xargs basename -s deduplicated.bismark.cov.gz \
+| xargs -I{} ${bismark_dir}/coverage2cytosine \
+--genome_folder ${genome_folder} \
+-o {} \
+--merge_CpG \
+--zero_based \
+{}deduplicated.bismark.cov.gz
+
+
+#creating bedgraphs post merge
+
+for f in *merged_CpG_evidence.cov
+do
+  STEM=$(basename "${f}" .CpG_report.merged_CpG_evidence.cov)
+  cat "${f}" | awk -F $'\t' 'BEGIN {OFS = FS} {if ($5+$6 >= 10) {print $1, $2, $3, $4}}' \
+  > "${STEM}"_10x.bedgraph
+done
+
+
+
+for f in *merged_CpG_evidence.cov
+do
+  STEM=$(basename "${f}" .CpG_report.merged_CpG_evidence.cov)
+  cat "${f}" | awk -F $'\t' 'BEGIN {OFS = FS} {if ($5+$6 >= 5) {print $1, $2, $3, $4}}' \
+  > "${STEM}"_5x.bedgraph
+done
+
+
+#creating tab files with raw count for glms
+
+for f in *merged_CpG_evidence.cov
+do
+  STEM=$(basename "${f}" .CpG_report.merged_CpG_evidence.cov)
+  cat "${f}" | awk -F $'\t' 'BEGIN {OFS = FS} {if ($5+$6 >= 10) {print $1, $2, $3, $4, $5, $6}}' \
+  > "${STEM}"_10x.tab
+done
+
+
+for f in *merged_CpG_evidence.cov
+do
+  STEM=$(basename "${f}" .CpG_report.merged_CpG_evidence.cov)
+  cat "${f}" | awk -F $'\t' 'BEGIN {OFS = FS} {if ($5+$6 >= 5) {print $1, $2, $3, $4, $5, $6}}' \
+  > "${STEM}"_5x.tab
+done

@@ -1,0 +1,255 @@
+---
+title: "Exploring-WGBS-data"
+output: html_document
+---
+
+### Load libraries 
+
+```{r setup, message=FALSE, warning=FALSE, results=FALSE}
+list.of.packages <- c("tidyverse", "reshape2", "here", "readr", "janitor", "dplyr", "scales") #add new libraries here 
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+# Load all libraries 
+lapply(list.of.packages, FUN = function(X) {
+  do.call("require", list(X)) 
+})
+sessionInfo()
+```
+
+## Examine results from the MethylExtract pipeline
+
+Import methylation tab file 
+```{r}
+meth <- read_delim(here::here("qc-processing", "methylExtract", "CG.output"), delim="\t", col_names = TRUE) %>%
+  clean_names() %>%
+  mutate_at(c("watson_meth", "watson_coverage", "watson_qual", "crick_meth", "crick_coverage", "crick_qual"),as.numeric) %>%
+  mutate_at(c("number_chrom", "context"),as.factor) %>%
+  mutate(watson_perc_meth=watson_meth/watson_coverage, crick_perc_meth=crick_meth/crick_coverage)
+```
+
+### Call methylation status based on % methylation 
+
+A locus is methylated if 50% or greater reads are methylated, that is they were unconverted after bisulfite treatment (in this dataset they are "C's") (Gavery and Roberts 2013; Olson and Roberts 2013). I will therefore determine methylation status using the numCs/coverage, where methylated = any greater or equal to 50%. 
+
+```{r}
+meth <- meth %>% 
+  mutate(watson_methstatus=factor(ifelse(watson_perc_meth >= 0.5, 'methylated', "unmethylated")),
+         crick_methstatus=factor(ifelse(crick_perc_meth >= 0.5, 'methylated', "unmethylated")))
+```
+
+## Inspect Context column 
+
+The context column contains info regarding SNVs, using the bellow IUPAC nucleotide codes, pulled from [https://www.bioinformatics.org/sms/iupac.html](https://www.bioinformatics.org/sms/iupac.html). 
+
+| IUPAC nucleotide code | Base                |
+|-----------------------|---------------------|
+| A                     | Adenine             |
+| C                     | Cytosine            |
+| G                     | Guanine             |
+| T (or U)              | Thymine (or Uracil) |
+| R                     | A or G              |
+| Y                     | C or T              |
+| S                     | G or C              |
+| W                     | A or T              |
+| K                     | G or T              |
+| M                     | A or C              |
+| B                     | C or G or T         |
+| D                     | A or G or T         |
+| H                     | A or C or T         |
+| V                     | A or C or G         |
+| N                     | any base            |
+| . or -                | gap                 |
+
+```{r}
+table(meth$context)
+
+loci_context <- as.data.frame(table(meth$context))
+paste("% of loci with CG context:", percent(loci_context[loci_context$Var1=="CG", "Freq"]/sum(loci_context$Freq), accuracy = 0.01))
+```
+
+## Calculate % of all CpG loci that are methylated.
+
+NOTE: for all summary stats I will only use data at CG contexts 
+
+```{r}
+# FWD 
+prop.table(table(subset(meth, context=="CG")$watson_methstatus))
+
+# REV
+prop.table(table(subset(meth, context=="CG")$crick_methstatus))
+```
+
+## Average coverage and proportion of CpG methylation on Forward (watson) and Reverse (crick) strands 
+
+```{r}
+paste("Average proportion CpG methylation, FWD:", percent(mean(subset(meth, context=="CG")$watson_perc_meth, na.rm=T), accuracy = .01))
+paste("Average coverage, FWD:", round(mean(subset(meth, context=="CG")$watson_coverage, na.rm=T), digits = 0))
+
+paste("Average proportion CpG methylation, REV:", percent(mean(subset(meth, context=="CG")$crick_perc_meth, na.rm=T), accuracy = .01))
+paste("Average coverage, REV:", round(mean(subset(meth, context=="CG")$crick_coverage, na.rm=T), digits = 0))
+```
+
+## Repeat the above, but for loci with 5x coverage only 
+
+```{r}
+paste("No. of FWD loci in dataset:", prettyNum(length(na.omit(subset(meth, context=="CG")$watson_coverage)), big.mark = ","))
+paste("No. of FWD loci with 5x coverage or greater:", prettyNum(nrow(subset(meth, watson_coverage>4 & context=="CG")), big.mark = ","))
+paste("Average proportion CpG methylation (5x cov), FWD:", percent(mean(subset(meth, watson_coverage>4 & context=="CG")$watson_perc_meth, na.rm=T), accuracy = .01))
+
+paste("No. of REV loci in dataset:", prettyNum(length(na.omit(subset(meth, context=="CG")$crick_coverage)), big.mark = ","))
+paste("No. of REV loci with 5x coverage or greater:", prettyNum(nrow(subset(meth, crick_coverage>4 & context=="CG")), big.mark = ","))
+paste("Average proportion CpG methylation (5x cov), REV:", percent(mean(subset(meth, crick_coverage>4 & context=="CG")$crick_perc_meth, na.rm=T), accuracy = .01))
+```
+
+## Examine results from Bismark-only pipline
+
+Read in coverage data 
+
+#### Column contents 
+1. chromosome
+2. start position
+3. end position
+4. methylation percentage
+5. count methylated
+6. count non-methylated
+
+```{r}
+cov.b <- read_delim(here::here("qc-processing", "bismark", "Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.deduplicated.bismark.cov"), delim="\t", col_names = c("contig", "start", "end", "percMeth", "meth", "unmeth")) 
+  # mutate_at(c("watson_meth", "watson_coverage", "watson_qual", "crick_meth", "crick_coverage", "crick_qual"),as.numeric) %>%
+  # mutate_at(c("number_chrom", "context"),as.factor) %>%
+  # mutate(watson_perc_meth=watson_meth/watson_coverage, crick_perc_meth=crick_meth/crick_coverage)
+
+str(cov.b)
+```
+
+#### Add coverage column and estimate of "methylated" and "unmethylated" based on 50% threshold
+
+```{r}
+cov.b <- cov.b %>% 
+  mutate(coverage=meth+unmeth) %>%
+  mutate(methyl.status=factor(ifelse(percMeth >= 50, 'methylated', "unmethylated")))
+```
+
+```{r}
+cov.b.10x <- subset(cov.b, coverage>9) 
+cov.b.5x <- subset(cov.b, coverage>4) 
+
+subset(cov.b, contig=="contig_2928_pilon" & start==7) #check to make sure only 1 row per contig+locus
+```
+
+## Read in the methylation call file to see if it contains a "call" for each locus, or for each read
+
+Answer: this file containsmethylation calls for each sequenced read, not for each locus.
+
+```{r}
+# meth.b <- read_delim(here::here("qc-processing", "bismark", "CpG_context_Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.deduplicated.txt"), delim="\t", col_names = c("seqID", "meth.state", "chrom", "pos", "methcall")) 
+# head(meth.b)
+# 
+# subset(meth.b, chrom=="contig_2928_pilon" & pos==7) #how many rows atthis locus? Answer = 200. So, this file contain methylation calls for each read
+```
+
+
+#### What is the mean proportion methylation?
+
+```{r}
+paste("Average proportion CpG methylation, no coverage limit:", percent(mean(cov.b$percMeth, na.rm = TRUE)/100, accuracy = .01))
+
+paste("Average proportion CpG methylation, min. coverage = 5x: ", round((cov.b %>% filter(coverage>4) %>% summarize_at("percMeth", mean, na.rm=TRUE))$percMeth,digits=2), "%", sep="")
+
+paste("Average proportion CpG methylation, min. coverage = 10x: ", round((cov.b %>% filter(coverage>9) %>% summarize_at("percMeth", mean, na.rm=TRUE))$percMeth,digits=2), "%", sep="")
+```
+
+#### What is the overall percent of loci that are  methylated (percMeth >50%)?
+```{r}
+print("Mean % of loci that are methylated, no coverage limit:")
+100*round(prop.table(table(cov.b$methyl.status)), digits=4)
+
+print("Mean % of loci that are methylated, 5x coverage minimum:")
+100*round(prop.table(table(subset(cov.b, coverage>4)$methyl.status)), digits=4)
+
+print("Mean % of loci that are methylated, 10x coverage minimum:")
+100*round(prop.table(table(subset(cov.b, coverage>9)$methyl.status)), digits=4)
+```
+
+
+```{r}
+paste("Total no. loci, no coverage limit:", cov.b %>% nrow())
+paste("Total no. METHYLATED loci, no coverage limit:",cov.b %>% filter(methyl.status=="methylated") %>% nrow())
+paste("Total no. UNMETHYLATED loci, no coverage limit:",cov.b %>% filter(methyl.status=="unmethylated") %>% nrow())
+
+paste("Total no. loci, 5x coverage min:", cov.b %>% filter(coverage>4) %>% nrow())
+paste("Total no. METHYLATED loci, 5x coverage min:", cov.b %>% filter(methyl.status=="methylated" & coverage>4) %>% nrow())
+paste("Total no. UNMETHYLATED loci, 5x coverage min:", cov.b %>% filter(methyl.status=="unmethylated" & coverage>4) %>% nrow())
+
+paste("Total no. loci, 10x coverage min:", cov.b %>% filter(coverage>9) %>% nrow())
+paste("Total no. METHYLATED loci, 10x coverage min:", cov.b %>% filter(methyl.status=="methylated" & coverage>9) %>% nrow())
+paste("Total no. UNMETHYLATED loci, 10x coverage min:", cov.b %>% filter(methyl.status=="unmethylated" & coverage>9) %>% nrow())
+```
+
+## Check out methylation bias by position. Note: the txt file that contains bias data has info for all cytosine contexts; the first 134 rows represent data for CpG context (which is why I only keep rows 4-134). 
+
+```{r}
+read_delim(here::here("qc-processing", "bismark", "Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.deduplicated.M-bias.txt"), 
+                      delim="\t", col_names = c("read.pos", "n.meth", "n.unmeth", "perc.meth", "cov")) [4:134,] %>%  
+  mutate_if(is.character,as.numeric) %>% 
+  ggplot(aes(x=read.pos, y=perc.meth)) + geom_point() + ggtitle("Methylation bias by read position, CpG context") + 
+  xlab("read position") + ylab("% methylation")
+```
+
+### Generage summary stats from merged coverage file (top and bottom strand info merged)
+
+```{r}
+mergecov.b <- read_delim(here::here("qc-processing", "bismark", "cov2cyto.CpG_report.merged_CpG_evidence.cov"), delim="\t", col_names = c("contig", "start", "stop", "perc.meth", "meth", "unmeth")) 
+```
+
+#### Add coverage column and estimate of "methylated" and "unmethylated" based on 50% threshold
+
+```{r}
+mergecov.b <- mergecov.b %>% 
+  mutate(coverage=meth+unmeth) %>%
+  mutate(methyl.status=factor(ifelse(perc.meth >= 50, 'methylated', "unmethylated")))
+```
+
+```{r}
+mergecov.b.10x <- subset(mergecov.b, coverage>9) 
+mergecov.b.5x <- subset(mergecov.b, coverage>4) 
+```
+
+#### What is the mean proportion methylation?
+
+```{r}
+paste("Average proportion CpG methylation, no coverage limit:", percent(mean(mergecov.b$perc.meth, na.rm = TRUE)/100, accuracy = .01))
+
+paste("Average proportion CpG methylation, min. coverage = 5x: ", round((mergecov.b %>% filter(coverage>4) %>% summarize_at("perc.meth", mean, na.rm=TRUE))$perc.meth,digits=2), "%", sep="")
+
+paste("Average proportion CpG methylation, min. coverage = 10x: ", round((mergecov.b %>% filter(coverage>9) %>% summarize_at("perc.meth", mean, na.rm=TRUE))$perc.meth,digits=2), "%", sep="")
+```
+
+#### What is the overall percent of loci that are  methylated (perc.meth >50%)?
+```{r}
+print("Mean % of loci that are methylated, no coverage limit:")
+100*round(prop.table(table(mergecov.b$methyl.status)), digits=4)
+
+print("Mean % of loci that are methylated, 5x coverage minimum:")
+100*round(prop.table(table(subset(mergecov.b, coverage>4)$methyl.status)), digits=4)
+
+print("Mean % of loci that are methylated, 10x coverage minimum:")
+100*round(prop.table(table(subset(mergecov.b, coverage>9)$methyl.status)), digits=4)
+
+```
+
+
+```{r}
+paste("Total no. loci, no coverage limit:", mergecov.b %>% nrow())
+paste("Total no. METHYLATED loci, no coverage limit:",mergecov.b %>% filter(methyl.status=="methylated") %>% nrow())
+paste("Total no. UNMETHYLATED loci, no coverage limit:",mergecov.b %>% filter(methyl.status=="unmethylated") %>% nrow())
+
+paste("Total no. loci, 5x coverage min:", mergecov.b %>% filter(coverage>4) %>% nrow())
+paste("Total no. METHYLATED loci, 5x coverage min:", mergecov.b %>% filter(methyl.status=="methylated" & coverage>4) %>% nrow())
+paste("Total no. UNMETHYLATED loci, 5x coverage min:", mergecov.b %>% filter(methyl.status=="unmethylated" & coverage>4) %>% nrow())
+
+paste("Total no. loci, 10x coverage min:", mergecov.b %>% filter(coverage>9) %>% nrow())
+paste("Total no. METHYLATED loci, 10x coverage min:", mergecov.b %>% filter(methyl.status=="methylated" & coverage>9) %>% nrow())
+paste("Total no. UNMETHYLATED loci, 10x coverage min:", mergecov.b %>% filter(methyl.status=="unmethylated" & coverage>9) %>% nrow())
+```
