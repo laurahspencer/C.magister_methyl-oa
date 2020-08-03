@@ -1,0 +1,3 @@
+Sample	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences
+Cmagister_WGBS_S11_L003_R1_001	49.549972311043675	30.0	151.0	18.181818181818183	314152279.0
+Cmagister_WGBS_S11_L003_R2_001	37.39183380346166	30.0	151.0	27.27272727272727	314152279.0
