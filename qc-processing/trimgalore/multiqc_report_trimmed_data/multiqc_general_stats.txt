@@ -1,0 +1,5 @@
+Sample	Cutadapt_mqc-generalstats-cutadapt-percent_trimmed	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences
+Cmagister_WGBS_S11_L003_R1_001	16.09902355371055					
+Cmagister_WGBS_S11_L003_R1_001_val_1		49.942739099323774	26.0	107.00208540780288	9.090909090909092	308740573.0
+Cmagister_WGBS_S11_L003_R2_001	19.443306656231492					
+Cmagister_WGBS_S11_L003_R2_001_val_2		43.56824349565957	27.0	103.33512669875105	9.090909090909092	308740573.0

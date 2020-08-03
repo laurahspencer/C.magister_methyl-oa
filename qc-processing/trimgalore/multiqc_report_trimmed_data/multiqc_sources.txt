@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+Cutadapt	all_sections	Cmagister_WGBS_S11_L003_R1_001	/Users/lhs3/Documents/laura-Cmagister/qc-processing/trimgalore/Cmagister_WGBS_S11_L003_R1_001.fastq_trimming_report.txt
+Cutadapt	all_sections	Cmagister_WGBS_S11_L003_R2_001	/Users/lhs3/Documents/laura-Cmagister/qc-processing/trimgalore/Cmagister_WGBS_S11_L003_R2_001.fastq_trimming_report.txt
+FastQC	all_sections	Cmagister_WGBS_S11_L003_R1_001_val_1	/Users/lhs3/Documents/laura-Cmagister/qc-processing/trimgalore/Cmagister_WGBS_S11_L003_R1_001_val_1_fastqc.zip
+FastQC	all_sections	Cmagister_WGBS_S11_L003_R2_001_val_2	/Users/lhs3/Documents/laura-Cmagister/qc-processing/trimgalore/Cmagister_WGBS_S11_L003_R2_001_val_2_fastqc.zip
