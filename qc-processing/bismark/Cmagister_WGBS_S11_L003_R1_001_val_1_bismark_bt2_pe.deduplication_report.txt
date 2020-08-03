@@ -1,0 +1,7 @@
+
+Total number of alignments analysed in /Users/lhs3/Documents/C.magister_methyl-oa/qc-processing/bismark/Cmagister_WGBS_S11_L003_R1_001_val_1_bismark_bt2_pe.bam:	95200482
+Total number duplicated alignments removed:	37294806 (39.18%)
+Duplicated alignments were found at:	20834411 different position(s)
+
+Total count of deduplicated leftover sequences: 57905676 (60.82% of total)
+
