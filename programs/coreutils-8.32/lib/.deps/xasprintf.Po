@@ -1,0 +1,8 @@
+lib/xasprintf.o: lib/xasprintf.c lib/config.h lib/xvasprintf.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdarg.h
+
+lib/config.h:
+
+lib/xvasprintf.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdarg.h:

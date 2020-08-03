@@ -1,0 +1,70 @@
+lib/memcasecmp.o: lib/memcasecmp.c lib/config.h lib/memcasecmp.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h \
+  lib/ctype.h /usr/include/ctype.h /usr/include/sys/cdefs.h \
+  /usr/include/sys/_symbol_aliasing.h \
+  /usr/include/sys/_posix_availability.h /usr/include/runetype.h \
+  /usr/include/_types.h /usr/include/sys/_types.h \
+  /usr/include/machine/_types.h /usr/include/i386/_types.h \
+  /usr/include/sys/_pthread/_pthread_types.h \
+  /usr/include/sys/_types/_size_t.h /usr/include/sys/_types/_ct_rune_t.h \
+  /usr/include/sys/_types/_rune_t.h /usr/include/sys/_types/_wchar_t.h \
+  /usr/include/sys/_types/_wint_t.h lib/limits.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/limits.h \
+  /usr/include/limits.h /usr/include/machine/limits.h \
+  /usr/include/i386/limits.h /usr/include/i386/_limits.h \
+  /usr/include/sys/syslimits.h
+
+lib/config.h:
+
+lib/memcasecmp.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h:
+
+lib/ctype.h:
+
+/usr/include/ctype.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/sys/_symbol_aliasing.h:
+
+/usr/include/sys/_posix_availability.h:
+
+/usr/include/runetype.h:
+
+/usr/include/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/i386/_types.h:
+
+/usr/include/sys/_pthread/_pthread_types.h:
+
+/usr/include/sys/_types/_size_t.h:
+
+/usr/include/sys/_types/_ct_rune_t.h:
+
+/usr/include/sys/_types/_rune_t.h:
+
+/usr/include/sys/_types/_wchar_t.h:
+
+/usr/include/sys/_types/_wint_t.h:
+
+lib/limits.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/limits.h:
+
+/usr/include/limits.h:
+
+/usr/include/machine/limits.h:
+
+/usr/include/i386/limits.h:
+
+/usr/include/i386/_limits.h:
+
+/usr/include/sys/syslimits.h:

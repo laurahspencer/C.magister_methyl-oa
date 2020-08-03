@@ -1,0 +1,17 @@
+lib/stripslash.o: lib/stripslash.c lib/config.h lib/dirname.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdbool.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h \
+  lib/dosname.h
+
+lib/config.h:
+
+lib/dirname.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdbool.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h:
+
+lib/dosname.h:

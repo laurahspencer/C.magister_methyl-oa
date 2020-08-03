@@ -1,0 +1,14 @@
+lib/asnprintf.o: lib/asnprintf.c lib/config.h lib/vasnprintf.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdarg.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h
+
+lib/config.h:
+
+lib/vasnprintf.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stdarg.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/stddef.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/7.3.0/include/__stddef_max_align_t.h:
