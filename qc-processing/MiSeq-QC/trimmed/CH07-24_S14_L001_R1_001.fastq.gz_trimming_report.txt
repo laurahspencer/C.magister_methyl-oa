@@ -1,0 +1,102 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
+    self.send_to_worker(chunk_index, chunk)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
+    self.close()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
+    self._raise_if_error(allow_sigterm=allow_sigterm)
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
+    raise OSError("{} (exit code {})".format(message, retcode))
+OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+
+ERROR: Traceback (most recent call last):
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 646, in run
+    (n, bp1, bp2) = self._pipeline.process_reads()
+  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 331, in process_reads
+    for read in self._reader:
+  File "src/dnaio/_core.pyx", line 260, in fastq_iter
+dnaio.exceptions.FastqFormatError: Error in FASTQ file at line 20444: Length of sequence and qualities differ
+
+cutadapt: error: Error in FASTQ file at line 20444: Length of sequence and qualities differ

@@ -1,0 +1,136 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH01-06_S1_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH01-06_S1_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 20.65 s (18 µs/read; 3.37 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               1,161,121
+Reads with adapters:                   709,259 (61.1%)
+Reads written (passing filters):     1,161,121 (100.0%)
+
+Total basepairs processed:    87,894,692 bp
+Quality-trimmed:                 159,022 bp (0.2%)
+Total written (filtered):     81,426,119 bp (92.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 709259 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 32.7%
+  C: 21.9%
+  G: 16.8%
+  T: 28.6%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	342998	290280.2	0	342998
+2	43904	72570.1	0	43904
+3	20157	18142.5	0	20157
+4	24344	4535.6	0	24344
+5	428	1133.9	0	428
+6	11034	283.5	0	11034
+7	11274	70.9	0	11274
+8	10480	17.7	0	10480
+9	11186	4.4	0	10946 240
+10	11054	1.1	1	10353 701
+11	11035	0.3	1	10077 958
+12	19818	0.1	1	18900 918
+13	1048	0.0	1	486 562
+14	19158	0.0	1	18254 904
+15	1122	0.0	1	568 554
+16	18185	0.0	1	17299 886
+17	875	0.0	1	520 355
+18	9870	0.0	1	8683 1187
+19	32408	0.0	1	30835 1573
+20	404	0.0	1	270 134
+21	478	0.0	1	372 106
+22	675	0.0	1	420 255
+23	8066	0.0	1	7132 934
+24	20127	0.0	1	19113 1014
+25	691	0.0	1	426 265
+26	6620	0.0	1	6092 528
+27	5744	0.0	1	5406 338
+28	642	0.0	1	415 227
+29	5821	0.0	1	5352 469
+30	5396	0.0	1	4899 497
+31	9222	0.0	1	8695 527
+32	510	0.0	1	248 262
+33	7960	0.0	1	7481 479
+34	432	0.0	1	265 167
+35	4153	0.0	1	3729 424
+36	6124	0.0	1	5759 365
+37	751	0.0	1	523 228
+38	4559	0.0	1	4292 267
+39	336	0.0	1	207 129
+40	2542	0.0	1	2298 244
+41	3119	0.0	1	2851 268
+42	3021	0.0	1	2860 161
+43	229	0.0	1	154 75
+44	1081	0.0	1	1005 76
+45	177	0.0	1	120 57
+46	1011	0.0	1	911 100
+47	934	0.0	1	847 87
+48	765	0.0	1	677 88
+49	781	0.0	1	676 105
+50	968	0.0	1	868 100
+51	396	0.0	1	349 47
+52	109	0.0	1	77 32
+53	412	0.0	1	357 55
+54	698	0.0	1	655 43
+55	107	0.0	1	91 16
+56	209	0.0	1	149 60
+57	1670	0.0	1	1607 63
+58	88	0.0	1	67 21
+59	79	0.0	1	49 30
+60	226	0.0	1	205 21
+61	32	0.0	1	19 13
+62	45	0.0	1	28 17
+63	70	0.0	1	57 13
+64	44	0.0	1	40 4
+65	33	0.0	1	26 7
+66	28	0.0	1	22 6
+67	37	0.0	1	30 7
+68	24	0.0	1	16 8
+69	19	0.0	1	14 5
+70	43	0.0	1	36 7
+71	184	0.0	1	171 13
+72	143	0.0	1	125 18
+73	416	0.0	1	368 48
+74	280	0.0	1	257 23
+75	83	0.0	1	69 14
+76	67	0.0	1	55 12
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH01-06_S1_L001_R1_001.fastq.gz
+=============================================
+1161121 sequences processed in total
+

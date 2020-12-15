@@ -1,0 +1,136 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH05-21_S10_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH05-21_S10_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 25.91 s (17 µs/read; 3.54 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               1,527,307
+Reads with adapters:                   913,167 (59.8%)
+Reads written (passing filters):     1,527,307 (100.0%)
+
+Total basepairs processed:   115,613,698 bp
+Quality-trimmed:                 211,452 bp (0.2%)
+Total written (filtered):    108,221,505 bp (93.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 913167 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 33.3%
+  C: 21.7%
+  G: 16.4%
+  T: 28.5%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	475927	381826.8	0	475927
+2	62014	95456.7	0	62014
+3	27373	23864.2	0	27373
+4	29556	5966.0	0	29556
+5	421	1491.5	0	421
+6	13152	372.9	0	13152
+7	13232	93.2	0	13232
+8	12311	23.3	0	12311
+9	13232	5.8	0	12988 244
+10	13083	1.5	1	12293 790
+11	12834	0.4	1	11811 1023
+12	23836	0.1	1	22923 913
+13	1154	0.0	1	583 571
+14	22435	0.0	1	21345 1090
+15	1386	0.0	1	751 635
+16	21232	0.0	1	20304 928
+17	1247	0.0	1	766 481
+18	11085	0.0	1	9938 1147
+19	36687	0.0	1	34978 1709
+20	621	0.0	1	431 190
+21	768	0.0	1	598 170
+22	825	0.0	1	462 363
+23	9087	0.0	1	8132 955
+24	23165	0.0	1	22058 1107
+25	896	0.0	1	566 330
+26	7527	0.0	1	6961 566
+27	6501	0.0	1	6127 374
+28	850	0.0	1	617 233
+29	6660	0.0	1	6223 437
+30	6048	0.0	1	5545 503
+31	10156	0.0	1	9658 498
+32	1049	0.0	1	609 440
+33	12182	0.0	1	11597 585
+34	314	0.0	1	246 68
+35	658	0.0	1	530 128
+36	4305	0.0	1	3837 468
+37	8151	0.0	1	7777 374
+38	261	0.0	1	203 58
+39	415	0.0	1	268 147
+40	2704	0.0	1	2461 243
+41	3317	0.0	1	3023 294
+42	3557	0.0	1	3370 187
+43	289	0.0	1	213 76
+44	1242	0.0	1	1154 88
+45	219	0.0	1	141 78
+46	1109	0.0	1	1021 88
+47	1025	0.0	1	912 113
+48	878	0.0	1	797 81
+49	840	0.0	1	720 120
+50	1065	0.0	1	968 97
+51	360	0.0	1	320 40
+52	171	0.0	1	119 52
+53	424	0.0	1	357 67
+54	719	0.0	1	651 68
+55	116	0.0	1	96 20
+56	198	0.0	1	138 60
+57	1096	0.0	1	1028 68
+58	75	0.0	1	55 20
+59	128	0.0	1	102 26
+60	180	0.0	1	161 19
+61	44	0.0	1	36 8
+62	52	0.0	1	36 16
+63	79	0.0	1	66 13
+64	64	0.0	1	53 11
+65	57	0.0	1	40 17
+66	61	0.0	1	45 16
+67	50	0.0	1	39 11
+68	29	0.0	1	18 11
+69	10	0.0	1	8 2
+70	22	0.0	1	16 6
+71	61	0.0	1	50 11
+72	47	0.0	1	35 12
+73	96	0.0	1	80 16
+74	95	0.0	1	91 4
+75	25	0.0	1	22 3
+76	27	0.0	1	23 4
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH05-21_S10_L001_R1_001.fastq.gz
+=============================================
+1527307 sequences processed in total
+

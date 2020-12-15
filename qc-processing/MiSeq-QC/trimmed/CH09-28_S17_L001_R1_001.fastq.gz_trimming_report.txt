@@ -1,0 +1,136 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH09-28_S17_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH09-28_S17_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 34.10 s (17 µs/read; 3.59 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               2,042,512
+Reads with adapters:                 1,288,972 (63.1%)
+Reads written (passing filters):     2,042,512 (100.0%)
+
+Total basepairs processed:   154,604,754 bp
+Quality-trimmed:                 263,065 bp (0.2%)
+Total written (filtered):    141,880,686 bp (91.8%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 1288972 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 36.3%
+  C: 19.5%
+  G: 14.7%
+  T: 29.4%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	614344	510628.0	0	614344
+2	76136	127657.0	0	76136
+3	36534	31914.2	0	36534
+4	42100	7978.6	0	42100
+5	603	1994.6	0	603
+6	19097	498.7	0	19097
+7	19402	124.7	0	19402
+8	18172	31.2	0	18172
+9	19374	7.8	0	18797 577
+10	19061	1.9	1	17619 1442
+11	19701	0.5	1	17651 2050
+12	35035	0.1	1	33297 1738
+13	2322	0.0	1	1001 1321
+14	33130	0.0	1	31436 1694
+15	2801	0.0	1	1384 1417
+16	31802	0.0	1	30090 1712
+17	2226	0.0	1	1391 835
+18	17637	0.0	1	15006 2631
+19	57143	0.0	1	54207 2936
+20	1401	0.0	1	1020 381
+21	1557	0.0	1	1257 300
+22	1672	0.0	1	1003 669
+23	15050	0.0	1	12992 2058
+24	35700	0.0	1	33777 1923
+25	1850	0.0	1	1152 698
+26	12132	0.0	1	11036 1096
+27	10969	0.0	1	10219 750
+28	1847	0.0	1	1262 585
+29	11062	0.0	1	10102 960
+30	10246	0.0	1	9112 1134
+31	17213	0.0	1	16265 948
+32	1858	0.0	1	1194 664
+33	14597	0.0	1	13872 725
+34	1087	0.0	1	684 403
+35	7531	0.0	1	6844 687
+36	7205	0.0	1	6592 613
+37	5788	0.0	1	5244 544
+38	5046	0.0	1	4538 508
+39	4750	0.0	1	4275 475
+40	4737	0.0	1	4198 539
+41	6355	0.0	1	5641 714
+42	6200	0.0	1	5839 361
+43	671	0.0	1	482 189
+44	2143	0.0	1	2008 135
+45	429	0.0	1	307 122
+46	2043	0.0	1	1846 197
+47	1837	0.0	1	1626 211
+48	1778	0.0	1	1580 198
+49	1854	0.0	1	1582 272
+50	2272	0.0	1	2056 216
+51	2446	0.0	1	2276 170
+52	930	0.0	1	697 233
+53	3426	0.0	1	3010 416
+54	2440	0.0	1	2287 153
+55	505	0.0	1	425 80
+56	1165	0.0	1	826 339
+57	7253	0.0	1	6943 310
+58	588	0.0	1	517 71
+59	718	0.0	1	590 128
+60	875	0.0	1	822 53
+61	135	0.0	1	111 24
+62	90	0.0	1	56 34
+63	207	0.0	1	179 28
+64	177	0.0	1	145 32
+65	91	0.0	1	73 18
+66	68	0.0	1	46 22
+67	56	0.0	1	34 22
+68	33	0.0	1	24 9
+69	29	0.0	1	17 12
+70	74	0.0	1	55 19
+71	324	0.0	1	296 28
+72	164	0.0	1	119 45
+73	575	0.0	1	477 98
+74	686	0.0	1	629 57
+75	259	0.0	1	225 34
+76	158	0.0	1	137 21
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH09-28_S17_L001_R1_001.fastq.gz
+=============================================
+2042512 sequences processed in total
+

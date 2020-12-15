@@ -1,0 +1,139 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R2_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R2_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 21.82 s (16 µs/read; 3.73 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               1,356,564
+Reads with adapters:                   839,742 (61.9%)
+Reads written (passing filters):     1,356,564 (100.0%)
+
+Total basepairs processed:   102,812,021 bp
+Quality-trimmed:                 683,407 bp (0.7%)
+Total written (filtered):     94,145,599 bp (91.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 839742 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 31.0%
+  C: 21.7%
+  G: 19.3%
+  T: 28.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	388223	339141.0	0	388223
+2	54380	84785.2	0	54380
+3	25655	21196.3	0	25655
+4	27972	5299.1	0	27972
+5	609	1324.8	0	609
+6	12944	331.2	0	12944
+7	13517	82.8	0	13517
+8	11985	20.7	0	11985
+9	12855	5.2	0	12602 253
+10	13480	1.3	1	12291 1189
+11	12579	0.3	1	11461 1118
+12	24516	0.1	1	22771 1745
+13	1144	0.0	1	628 516
+14	13491	0.0	1	12070 1421
+15	21589	0.0	1	20469 1120
+16	1223	0.0	1	750 473
+17	12461	0.0	1	11315 1146
+18	10433	0.0	1	9347 1086
+19	11568	0.0	1	10564 1004
+20	10989	0.0	1	9918 1071
+21	9416	0.0	1	8702 714
+22	9714	0.0	1	8697 1017
+23	9756	0.0	1	8968 788
+24	10384	0.0	1	9502 882
+25	8286	0.0	1	7540 746
+26	8526	0.0	1	7827 699
+27	8422	0.0	1	7651 771
+28	8336	0.0	1	7656 680
+29	6638	0.0	1	6221 417
+30	6927	0.0	1	6389 538
+31	6424	0.0	1	5948 476
+32	6029	0.0	1	5601 428
+33	5660	0.0	1	5228 432
+34	5778	0.0	1	5268 510
+35	4876	0.0	1	4511 365
+36	4990	0.0	1	4506 484
+37	10037	0.0	1	9467 570
+38	762	0.0	1	596 166
+39	3015	0.0	1	2798 217
+40	640	0.0	1	484 156
+41	2834	0.0	1	2612 222
+42	2735	0.0	1	2501 234
+43	2155	0.0	1	1969 186
+44	2036	0.0	1	1812 224
+45	1955	0.0	1	1783 172
+46	2547	0.0	1	2383 164
+47	458	0.0	1	336 122
+48	1940	0.0	1	1791 149
+49	837	0.0	1	763 74
+50	269	0.0	1	195 74
+51	856	0.0	1	786 70
+52	686	0.0	1	604 82
+53	576	0.0	1	497 79
+54	716	0.0	1	650 66
+55	176	0.0	1	138 38
+56	367	0.0	1	326 41
+57	372	0.0	1	329 43
+58	393	0.0	1	351 42
+59	343	0.0	1	309 34
+60	298	0.0	1	264 34
+61	150	0.0	1	130 20
+62	101	0.0	1	83 18
+63	93	0.0	1	78 15
+64	75	0.0	1	57 18
+65	66	0.0	1	49 17
+66	68	0.0	1	53 15
+67	64	0.0	1	42 22
+68	57	0.0	1	40 17
+69	36	0.0	1	29 7
+70	32	0.0	1	26 6
+71	34	0.0	1	29 5
+72	35	0.0	1	29 6
+73	65	0.0	1	53 12
+74	26	0.0	1	25 1
+75	17	0.0	1	14 3
+76	45	0.0	1	36 9
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R2_001.fastq.gz
+=============================================
+1356564 sequences processed in total
+
+Total number of sequences analysed for the sequence pair length validation: 1356564
+
+Number of sequence pairs removed because at least one read was shorter than the length cutoff (20 bp): 52580 (3.88%)

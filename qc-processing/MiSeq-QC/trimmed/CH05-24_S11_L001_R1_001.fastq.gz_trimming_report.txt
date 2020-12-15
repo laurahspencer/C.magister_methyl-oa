@@ -1,0 +1,136 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH05-24_S11_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH05-24_S11_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 16.04 s (17 µs/read; 3.59 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:                 960,973
+Reads with adapters:                   621,285 (64.7%)
+Reads written (passing filters):       960,973 (100.0%)
+
+Total basepairs processed:    72,721,491 bp
+Quality-trimmed:                 134,301 bp (0.2%)
+Total written (filtered):     65,800,503 bp (90.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 621285 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 29.7%
+  C: 22.9%
+  G: 19.3%
+  T: 28.1%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	249561	240243.2	0	249561
+2	38153	60060.8	0	38153
+3	18358	15015.2	0	18358
+4	22726	3753.8	0	22726
+5	383	938.5	0	383
+6	10593	234.6	0	10593
+7	10635	58.7	0	10635
+8	10151	14.7	0	10151
+9	10897	3.7	0	10667 230
+10	10723	0.9	1	10040 683
+11	10783	0.2	1	9949 834
+12	20125	0.1	1	19302 823
+13	991	0.0	1	483 508
+14	18962	0.0	1	18052 910
+15	1211	0.0	1	679 532
+16	18312	0.0	1	17457 855
+17	1200	0.0	1	776 424
+18	10537	0.0	1	9357 1180
+19	31888	0.0	1	30406 1482
+20	939	0.0	1	675 264
+21	998	0.0	1	806 192
+22	801	0.0	1	488 313
+23	8559	0.0	1	7662 897
+24	21202	0.0	1	20187 1015
+25	1041	0.0	1	725 316
+26	7293	0.0	1	6695 598
+27	6322	0.0	1	5933 389
+28	995	0.0	1	740 255
+29	6453	0.0	1	6040 413
+30	5812	0.0	1	5345 467
+31	9928	0.0	1	9443 485
+32	1076	0.0	1	798 278
+33	8235	0.0	1	7864 371
+34	758	0.0	1	583 175
+35	4761	0.0	1	4274 487
+36	9569	0.0	1	9123 446
+37	270	0.0	1	215 55
+38	561	0.0	1	373 188
+39	4793	0.0	1	4541 252
+40	717	0.0	1	588 129
+41	3760	0.0	1	3430 330
+42	3625	0.0	1	3440 185
+43	405	0.0	1	325 80
+44	1374	0.0	1	1285 89
+45	260	0.0	1	193 67
+46	1255	0.0	1	1161 94
+47	1295	0.0	1	1173 122
+48	1083	0.0	1	980 103
+49	1017	0.0	1	897 120
+50	1236	0.0	1	1151 85
+51	525	0.0	1	485 40
+52	269	0.0	1	212 57
+53	632	0.0	1	547 85
+54	1019	0.0	1	944 75
+55	258	0.0	1	227 31
+56	517	0.0	1	415 102
+57	2690	0.0	1	2593 97
+58	304	0.0	1	270 34
+59	323	0.0	1	265 58
+60	413	0.0	1	375 38
+61	98	0.0	1	79 19
+62	101	0.0	1	75 26
+63	152	0.0	1	130 22
+64	131	0.0	1	115 16
+65	96	0.0	1	78 18
+66	86	0.0	1	74 12
+67	62	0.0	1	52 10
+68	39	0.0	1	27 12
+69	27	0.0	1	26 1
+70	53	0.0	1	47 6
+71	184	0.0	1	172 12
+72	104	0.0	1	85 19
+73	211	0.0	1	171 40
+74	264	0.0	1	255 9
+75	91	0.0	1	77 14
+76	54	0.0	1	52 2
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH05-24_S11_L001_R1_001.fastq.gz
+=============================================
+960973 sequences processed in total
+

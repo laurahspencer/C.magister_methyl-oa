@@ -1,0 +1,7 @@
+
+Total number of alignments analysed in CH10-01_S18_L001_R1_001_val_1_bismark_bt2_pe.bam:	1097426
+Total number duplicated alignments removed:	9408 (0.86%)
+Duplicated alignments were found at:	8760 different position(s)
+
+Total count of deduplicated leftover sequences: 1088018 (99.14% of total)
+

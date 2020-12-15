@@ -1,0 +1,136 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R1_001.fastq.gz
+Trimming mode: paired-end
+Trim Galore version: 0.6.6
+Cutadapt version: 3.1
+Python version: could not detect
+Number of cores used for trimming: 8
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Running FastQC on the data once trimming has completed
+Running FastQC with the following extra arguments: --outdir FastQC --threads 28
+Output file will be GZIP compressed
+
+
+This is cutadapt 3.1 with Python 3.8.6
+Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R1_001.fastq.gz
+Processing reads on 8 cores in single-end mode ...
+Finished in 21.87 s (16 µs/read; 3.72 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               1,356,564
+Reads with adapters:                   848,216 (62.5%)
+Reads written (passing filters):     1,356,564 (100.0%)
+
+Total basepairs processed:   102,688,306 bp
+Quality-trimmed:                 285,834 bp (0.3%)
+Total written (filtered):     94,147,110 bp (91.7%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 848216 times
+
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 30.5%
+  C: 22.9%
+  G: 18.5%
+  T: 28.2%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	378871	339141.0	0	378871
+2	55033	84785.2	0	55033
+3	26650	21196.3	0	26650
+4	28907	5299.1	0	28907
+5	604	1324.8	0	604
+6	13249	331.2	0	13249
+7	13547	82.8	0	13547
+8	12525	20.7	0	12525
+9	13231	5.2	0	12962 269
+10	13579	1.3	1	12635 944
+11	13604	0.3	1	12428 1176
+12	24620	0.1	1	23488 1132
+13	1369	0.0	1	694 675
+14	23581	0.0	1	22363 1218
+15	1864	0.0	1	1092 772
+16	22595	0.0	1	21390 1205
+17	1677	0.0	1	1141 536
+18	11904	0.0	1	10517 1387
+19	40044	0.0	1	37973 2071
+20	1202	0.0	1	861 341
+21	1341	0.0	1	1036 305
+22	1305	0.0	1	848 457
+23	10108	0.0	1	9050 1058
+24	25603	0.0	1	24204 1399
+25	1422	0.0	1	959 463
+26	8849	0.0	1	8068 781
+27	7966	0.0	1	7399 567
+28	1282	0.0	1	956 326
+29	8025	0.0	1	7395 630
+30	6992	0.0	1	6390 602
+31	12144	0.0	1	11492 652
+32	1279	0.0	1	899 380
+33	10500	0.0	1	9942 558
+34	1432	0.0	1	969 463
+35	12688	0.0	1	12039 649
+36	1171	0.0	1	1082 89
+37	504	0.0	1	322 182
+38	4290	0.0	1	3895 395
+39	3599	0.0	1	3275 324
+40	3584	0.0	1	3229 355
+41	4793	0.0	1	4365 428
+42	4604	0.0	1	4317 287
+43	531	0.0	1	423 108
+44	1769	0.0	1	1658 111
+45	371	0.0	1	270 101
+46	1741	0.0	1	1561 180
+47	1570	0.0	1	1395 175
+48	1403	0.0	1	1269 134
+49	1229	0.0	1	1065 164
+50	1628	0.0	1	1482 146
+51	730	0.0	1	651 79
+52	366	0.0	1	303 63
+53	606	0.0	1	504 102
+54	1090	0.0	1	1018 72
+55	219	0.0	1	182 37
+56	258	0.0	1	195 63
+57	1118	0.0	1	1056 62
+58	152	0.0	1	123 29
+59	144	0.0	1	113 31
+60	215	0.0	1	191 24
+61	64	0.0	1	39 25
+62	50	0.0	1	31 19
+63	107	0.0	1	82 25
+64	86	0.0	1	68 18
+65	77	0.0	1	60 17
+66	75	0.0	1	57 18
+67	74	0.0	1	57 17
+68	44	0.0	1	33 11
+69	21	0.0	1	14 7
+70	38	0.0	1	30 8
+71	68	0.0	1	59 9
+72	33	0.0	1	24 9
+73	81	0.0	1	72 9
+74	72	0.0	1	69 3
+75	25	0.0	1	23 2
+76	24	0.0	1	19 5
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH05-01_S8_L001_R1_001.fastq.gz
+=============================================
+1356564 sequences processed in total
+
