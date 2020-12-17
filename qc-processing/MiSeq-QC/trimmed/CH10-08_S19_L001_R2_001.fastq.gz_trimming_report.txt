@@ -25,7 +25,7 @@ Output file will be GZIP compressed
 This is cutadapt 3.1 with Python 3.8.6
 Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH10-08_S19_L001_R2_001.fastq.gz
 Processing reads on 8 cores in single-end mode ...
-Finished in 25.64 s (17 µs/read; 3.57 M reads/minute).
+Finished in 25.76 s (17 µs/read; 3.56 M reads/minute).
 
 === Summary ===
 

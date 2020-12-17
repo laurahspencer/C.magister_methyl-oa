@@ -25,77 +25,112 @@ Output file will be GZIP compressed
 This is cutadapt 3.1 with Python 3.8.6
 Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz
 Processing reads on 8 cores in single-end mode ...
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--crc error
+Finished in 29.40 s (17 µs/read; 3.56 M reads/minute).
 
-gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--length error (exit code 1)
+=== Summary ===
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--crc error
+Total reads processed:               1,743,736
+Reads with adapters:                 1,103,032 (63.3%)
+Reads written (passing filters):     1,743,736 (100.0%)
 
-gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--length error (exit code 1)
+Total basepairs processed:   131,972,223 bp
+Quality-trimmed:                 259,825 bp (0.2%)
+Total written (filtered):    120,659,821 bp (91.4%)
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--crc error
+=== Adapter 1 ===
 
-gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--length error (exit code 1)
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 1103032 times
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--crc error
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
 
-gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--length error (exit code 1)
+Bases preceding removed adapters:
+  A: 30.7%
+  C: 21.4%
+  G: 18.3%
+  T: 29.5%
+  none/other: 0.0%
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--crc error
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	473139	435934.0	0	473139
+2	69984	108983.5	0	69984
+3	33623	27245.9	0	33623
+4	39837	6811.5	0	39837
+5	592	1702.9	0	592
+6	18285	425.7	0	18285
+7	18494	106.4	0	18494
+8	17198	26.6	0	17198
+9	18574	6.7	0	18170 404
+10	18619	1.7	1	17430 1189
+11	18522	0.4	1	16894 1628
+12	34427	0.1	1	32938 1489
+13	1882	0.0	1	913 969
+14	32797	0.0	1	31204 1593
+15	2328	0.0	1	1371 957
+16	31305	0.0	1	29734 1571
+17	2130	0.0	1	1451 679
+18	16996	0.0	1	15032 1964
+19	55046	0.0	1	52410 2636
+20	1583	0.0	1	1136 447
+21	1877	0.0	1	1519 358
+22	1709	0.0	1	1110 599
+23	14586	0.0	1	13058 1528
+24	34495	0.0	1	32762 1733
+25	2085	0.0	1	1467 618
+26	11641	0.0	1	10735 906
+27	10324	0.0	1	9664 660
+28	1869	0.0	1	1398 471
+29	10862	0.0	1	10152 710
+30	9581	0.0	1	8772 809
+31	15857	0.0	1	15125 732
+32	2622	0.0	1	1834 788
+33	23686	0.0	1	22590 1096
+34	598	0.0	1	484 114
+35	1124	0.0	1	1007 117
+36	2369	0.0	1	1996 373
+37	9178	0.0	1	8613 565
+38	4091	0.0	1	3828 263
+39	839	0.0	1	643 196
+40	4459	0.0	1	4054 405
+41	5705	0.0	1	5223 482
+42	5292	0.0	1	5011 281
+43	673	0.0	1	533 140
+44	2035	0.0	1	1898 137
+45	489	0.0	1	371 118
+46	1886	0.0	1	1722 164
+47	1781	0.0	1	1600 181
+48	1521	0.0	1	1365 156
+49	1367	0.0	1	1198 169
+50	1910	0.0	1	1775 135
+51	674	0.0	1	599 75
+52	303	0.0	1	224 79
+53	801	0.0	1	672 129
+54	1398	0.0	1	1281 117
+55	426	0.0	1	354 72
+56	684	0.0	1	548 136
+57	3209	0.0	1	3061 148
+58	412	0.0	1	371 41
+59	460	0.0	1	400 60
+60	526	0.0	1	463 63
+61	137	0.0	1	99 38
+62	113	0.0	1	89 24
+63	228	0.0	1	200 28
+64	178	0.0	1	146 32
+65	137	0.0	1	102 35
+66	136	0.0	1	108 28
+67	109	0.0	1	86 23
+68	71	0.0	1	49 22
+69	42	0.0	1	29 13
+70	62	0.0	1	45 17
+71	215	0.0	1	186 29
+72	135	0.0	1	109 26
+73	271	0.0	1	225 46
+74	260	0.0	1	247 13
+75	89	0.0	1	77 12
+76	84	0.0	1	74 10
 
-gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz: invalid compressed data--length error (exit code 1)
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH01-38_S4_L001_R1_001.fastq.gz
+=============================================
+1743736 sequences processed in total
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 646, in run
-    (n, bp1, bp2) = self._pipeline.process_reads()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 331, in process_reads
-    for read in self._reader:
-  File "src/dnaio/_core.pyx", line 260, in fastq_iter
-dnaio.exceptions.FastqFormatError: Error in FASTQ file at line 63232: Length of sequence and qualities differ
-
-cutadapt: error: Error in FASTQ file at line 63232: Length of sequence and qualities differ

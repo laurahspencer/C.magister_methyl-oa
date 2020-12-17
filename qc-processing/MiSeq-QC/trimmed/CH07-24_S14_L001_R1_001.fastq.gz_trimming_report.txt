@@ -25,78 +25,112 @@ Output file will be GZIP compressed
 This is cutadapt 3.1 with Python 3.8.6
 Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz
 Processing reads on 8 cores in single-end mode ...
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+Finished in 15.61 s (16 µs/read; 3.78 M reads/minute).
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+=== Summary ===
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+Total reads processed:                 983,655
+Reads with adapters:                   619,998 (63.0%)
+Reads written (passing filters):       983,655 (100.0%)
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+Total basepairs processed:    74,456,874 bp
+Quality-trimmed:                 284,927 bp (0.4%)
+Total written (filtered):     67,094,878 bp (90.1%)
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+=== Adapter 1 ===
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz: unexpected end of file (exit code 1)
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 619998 times
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 646, in run
-    (n, bp1, bp2) = self._pipeline.process_reads()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 331, in process_reads
-    for read in self._reader:
-  File "src/dnaio/_core.pyx", line 260, in fastq_iter
-dnaio.exceptions.FastqFormatError: Error in FASTQ file at line 20444: Length of sequence and qualities differ
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
 
-cutadapt: error: Error in FASTQ file at line 20444: Length of sequence and qualities differ
+Bases preceding removed adapters:
+  A: 35.8%
+  C: 20.1%
+  G: 14.0%
+  T: 29.4%
+  none/other: 0.7%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	288449	245913.8	0	288449
+2	36273	61478.4	0	36273
+3	18061	15369.6	0	18061
+4	19331	3842.4	0	19331
+5	298	960.6	0	298
+6	8554	240.2	0	8554
+7	8520	60.0	0	8520
+8	8133	15.0	0	8133
+9	8558	3.8	0	8296 262
+10	8707	0.9	1	8052 655
+11	9074	0.2	1	8030 1044
+12	15698	0.1	1	14904 794
+13	987	0.0	1	327 660
+14	15000	0.0	1	14196 804
+15	1138	0.0	1	414 724
+16	14323	0.0	1	13560 763
+17	913	0.0	1	497 416
+18	8250	0.0	1	6774 1476
+19	25937	0.0	1	24504 1433
+20	428	0.0	1	280 148
+21	409	0.0	1	333 76
+22	669	0.0	1	335 334
+23	6955	0.0	1	5917 1038
+24	16512	0.0	1	15534 978
+25	772	0.0	1	371 401
+26	5568	0.0	1	5059 509
+27	4936	0.0	1	4586 350
+28	732	0.0	1	432 300
+29	4816	0.0	1	4337 479
+30	4905	0.0	1	4300 605
+31	8210	0.0	1	7711 499
+32	853	0.0	1	442 411
+33	6979	0.0	1	6583 396
+34	477	0.0	1	250 227
+35	3401	0.0	1	3055 346
+36	3442	0.0	1	3078 364
+37	2860	0.0	1	2437 423
+38	4596	0.0	1	4287 309
+39	395	0.0	1	242 153
+40	2251	0.0	1	1927 324
+41	3104	0.0	1	2716 388
+42	3218	0.0	1	2986 232
+43	326	0.0	1	211 115
+44	1175	0.0	1	1098 77
+45	249	0.0	1	157 92
+46	1034	0.0	1	893 141
+47	1059	0.0	1	934 125
+48	957	0.0	1	825 132
+49	1031	0.0	1	859 172
+50	1280	0.0	1	1142 138
+51	1357	0.0	1	1249 108
+52	437	0.0	1	323 114
+53	2078	0.0	1	1754 324
+54	2199	0.0	1	2060 139
+55	356	0.0	1	277 79
+56	963	0.0	1	610 353
+57	9165	0.0	1	8791 374
+58	395	0.0	1	347 48
+59	512	0.0	1	362 150
+60	972	0.0	1	921 51
+61	100	0.0	1	81 19
+62	99	0.0	1	69 30
+63	243	0.0	1	212 31
+64	200	0.0	1	164 36
+65	114	0.0	1	90 24
+66	86	0.0	1	77 9
+67	73	0.0	1	56 17
+68	76	0.0	1	61 15
+69	101	0.0	1	87 14
+70	201	0.0	1	183 18
+71	933	0.0	1	866 67
+72	984	0.0	1	822 162
+73	3600	0.0	1	3199 401
+74	3073	0.0	1	2857 216
+75	936	0.0	1	809 127
+76	942	0.0	1	803 139
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH07-24_S14_L001_R1_001.fastq.gz
+=============================================
+983655 sequences processed in total
+

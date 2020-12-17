@@ -25,78 +25,112 @@ Output file will be GZIP compressed
 This is cutadapt 3.1 with Python 3.8.6
 Command line parameters: -j 8 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz
 Processing reads on 8 cores in single-end mode ...
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+Finished in 47.33 s (17 µs/read; 3.62 M reads/minute).
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+=== Summary ===
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+Total reads processed:               2,853,418
+Reads with adapters:                 1,837,034 (64.4%)
+Reads written (passing filters):     2,853,418 (100.0%)
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+Total basepairs processed:   216,013,835 bp
+Quality-trimmed:                 465,339 bp (0.2%)
+Total written (filtered):    197,167,943 bp (91.3%)
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+=== Adapter 1 ===
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 575, in run
-    self.send_to_worker(chunk_index, chunk)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 135, in __exit__
-    self.close()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 321, in close
-    self._raise_if_error(allow_sigterm=allow_sigterm)
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/xopen/__init__.py", line 344, in _raise_if_error
-    raise OSError("{} (exit code {})".format(message, retcode))
-OSError: gzip: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz: invalid compressed data--format violated (exit code 1)
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 1837034 times
 
-ERROR: Traceback (most recent call last):
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 646, in run
-    (n, bp1, bp2) = self._pipeline.process_reads()
-  File "/usr/lusers/lhs3/miniconda3/envs/cutadaptenv/lib/python3.8/site-packages/cutadapt/pipeline.py", line 331, in process_reads
-    for read in self._reader:
-  File "src/dnaio/_core.pyx", line 260, in fastq_iter
-dnaio.exceptions.FastqFormatError: Error in FASTQ file at line 42036: Length of sequence and qualities differ
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
 
-cutadapt: error: Error in FASTQ file at line 42036: Length of sequence and qualities differ
+Bases preceding removed adapters:
+  A: 34.6%
+  C: 18.6%
+  G: 15.9%
+  T: 30.9%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	769306	713354.5	0	769306
+2	111048	178338.6	0	111048
+3	56061	44584.7	0	56061
+4	67513	11146.2	0	67513
+5	1080	2786.5	0	1080
+6	31407	696.6	0	31407
+7	31841	174.2	0	31841
+8	30111	43.5	0	30111
+9	32357	10.9	0	31615 742
+10	32329	2.7	1	29989 2340
+11	32940	0.7	1	29727 3213
+12	59426	0.2	1	56663 2763
+13	3438	0.0	1	1433 2005
+14	56630	0.0	1	53761 2869
+15	3724	0.0	1	1583 2141
+16	55446	0.0	1	52683 2763
+17	2921	0.0	1	1655 1266
+18	29785	0.0	1	25528 4257
+19	98997	0.0	1	93997 5000
+20	1254	0.0	1	801 453
+21	1430	0.0	1	1102 328
+22	2213	0.0	1	1219 994
+23	25059	0.0	1	21856 3203
+24	63405	0.0	1	60202 3203
+25	2118	0.0	1	1031 1087
+26	20838	0.0	1	19108 1730
+27	18717	0.0	1	17649 1068
+28	1819	0.0	1	1037 782
+29	18922	0.0	1	17373 1549
+30	17214	0.0	1	15398 1816
+31	29828	0.0	1	28095 1733
+32	2346	0.0	1	1282 1064
+33	24640	0.0	1	23332 1308
+34	1490	0.0	1	807 683
+35	12733	0.0	1	11734 999
+36	10349	0.0	1	9458 891
+37	9704	0.0	1	8904 800
+38	8652	0.0	1	7811 841
+39	7686	0.0	1	6953 733
+40	7915	0.0	1	7015 900
+41	9648	0.0	1	8722 926
+42	8978	0.0	1	8454 524
+43	605	0.0	1	375 230
+44	3181	0.0	1	2963 218
+45	424	0.0	1	232 192
+46	2901	0.0	1	2570 331
+47	2636	0.0	1	2372 264
+48	2013	0.0	1	1774 239
+49	1947	0.0	1	1628 319
+50	2485	0.0	1	2246 239
+51	1110	0.0	1	1017 93
+52	297	0.0	1	187 110
+53	1259	0.0	1	1030 229
+54	1406	0.0	1	1305 101
+55	174	0.0	1	140 34
+56	316	0.0	1	178 138
+57	1694	0.0	1	1596 98
+58	115	0.0	1	86 29
+59	130	0.0	1	94 36
+60	272	0.0	1	248 24
+61	43	0.0	1	27 16
+62	34	0.0	1	18 16
+63	81	0.0	1	62 19
+64	78	0.0	1	56 22
+65	44	0.0	1	33 11
+66	37	0.0	1	27 10
+67	26	0.0	1	16 10
+68	24	0.0	1	17 7
+69	11	0.0	1	6 5
+70	21	0.0	1	14 7
+71	39	0.0	1	32 7
+72	28	0.0	1	19 9
+73	81	0.0	1	70 11
+74	137	0.0	1	128 9
+75	39	0.0	1	29 10
+76	28	0.0	1	21 7
+
+RUN STATISTICS FOR INPUT FILE: /gscratch/srlab/lhs3/inputs/C_magister/CH10-11_S20_L001_R1_001.fastq.gz
+=============================================
+2853418 sequences processed in total
+
