@@ -180,6 +180,16 @@ meth_unite_reshaped %>%
   summarize(mean = mean(percMeth), n = n())
 ```
 
+### Is % methylation a function of coverage within a sample? 
+
+The following samples have low CpG methylation: 5, 6, 9, 13, 14, kind of 19. Check out each sample individually 
+
+```{r}
+meth_unite_reshaped %>% 
+  ggplot() + geom_point(aes(x=coverage, y=percMeth)) +
+  facet_wrap(~sample)
+```
+
 ### Generate CpG methylation histograms after filtering for coverage
 
 ### Filter out loci where coverage is less than 5x or greater than 100x. 
