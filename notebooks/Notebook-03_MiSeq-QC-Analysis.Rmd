@@ -1,0 +1,229 @@
+---
+title: "MiSeq-MethylKit"
+author: "Laura H Spencer"
+date: "12/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Load libraries
+
+```{r message=FALSE, warning=FALSE, results=FALSE}
+list.of.packages <- c("tidyverse", "reshape2", "here", "methylKit", "ggforce", "matrixStats", "Pstat", "viridis", "plotly", "readr", "GenomicRanges", "vegan", "factoextra") #add new libraries here 
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+# Load all libraries 
+lapply(list.of.packages, FUN = function(X) {
+  do.call("require", list(X)) 
+})
+```
+
+### Obtain session information
+
+```{r}
+sessionInfo()
+```
+
+### Check current directory 
+
+```{r}
+getwd()
+```
+
+### Download files from `gannet` 
+
+### Create list of all bismark data files, which have reads that are already trimmed and aligned. These BAM files are also sorted and indexed. 
+
+### IMPORTANT NOTE: The location of these files depends on where the user saved them. I (Laura) used an external hard drive. 
+
+Files were transferred from Hyak on December 27th, 2020 using `rsync`. 
+
+```{r}
+file.list=list("/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-06_S1_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-14_S2_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-22_S3_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-38_S4_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-04_S5_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-15_S6_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-33_S7_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-01_S8_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-06_S9_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-21_S10_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-24_S11_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-06_S12_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-11_S13_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-24_S14_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-02_S15_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-13_S16_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-28_S17_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-01_S18_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-08_S19_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-11_S20_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam")
+```
+
+#### Read in MiSeq bismark summary with sample treatment info 
+
+```{r}
+summary <- read_delim(file="../qc-processing/MiSeq-QC/mbdall.txt", delim="\t") %>%
+  arrange(sample_mbd) %>% filter(sample_mbd != "NA")
+head(summary)
+
+as.numeric(as.factor(summary$treatment_high_lowCO2))
+```
+
+#### The following command reads sorted BAM files and calls methylation percentage per base, and creates a methylRaw object for CpG methylation. It also assigns minimum coverage of 2x and the treatments (in this case, the CO2 treatment)
+
+```{r}
+myobj_MiSeq = processBismarkAln(location = file.list, sample.id = list("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18", "19", "20"), assembly = "pilon_scaffolds.fasta", read.context="CpG", mincov=2, treatment = as.numeric(as.factor(summary$treatment_high_lowCO2)))
+```
+
+#### Save the MethylKit object; re-doing the previous step is memory/time intensive, so best to use the saved object moving forward. 
+
+```{r}
+getwd()
+save(myobj_MiSeq, file = "../qc-processing/MiSeq-QC/myobj_MiSeq") 
+```
+
+#### compress MethylKit object, if desired 
+
+```{bash}
+#zip ../analyses/myobj_MiSeq.zip ../analyses/myobj_MiSeq
+```
+
+#### Load object if needed 
+
+```{r}
+#load("../qc-processing/MiSeq-QC/myobj_MiSeq")
+```
+
+#### What does the resulting object look like? 
+
+```{r}
+# Check out data for sample #1 
+head(myobj_MiSeq[[1]])
+```
+
+### Check the basic stats about the methylation data - coverage and percent methylation. Index the object to look through each sample
+
+```{r}
+# First look at % CpG methylation (panels)
+for (i in 1:20) {
+getMethylationStats(myobj_MiSeq[[i]],plot=T,both.strands=TRUE)
+     mtext(paste("Sample", i, sep=" "), side=3, line = -6)
+}
+```
+
+```{r}
+# Now look at coverage 
+for (i in 1:20) {
+ getCoverageStats(myobj_MiSeq[[i]],plot=TRUE,both.strands=TRUE) 
+   mtext(paste("Sample", i, sep=" "), side=3, line = -6)
+}
+```
+
+### Column bind all samples, and destrand. 
+
+```{r}
+meth_unite=methylKit::unite(myobj_MiSeq, destrand=TRUE, min.per.group=1L)
+#save(meth_unite, file = "../qc-processing/MiSeq-QC/meth_unite") #save object to file
+```
+
+### Reshape data to do various filtering and calculations 
+
+```{r}
+meth_unite_reshaped <- melt(data=meth_unite, id=c("chr", "start", "end", "strand"), value.name = "count") %>%
+ tidyr::separate(col = "variable" , into = c("variable", "sample"), sep = "(?<=[a-zA-Z])\\s*(?=[0-9])") %>%
+  dcast(chr+start+end+strand+sample ~  variable) %>%
+  drop_na(coverage) %>% 
+  mutate(percMeth = 100*(numCs/coverage)) %>% 
+  mutate(sample=as.numeric(sample))
+
+head(meth_unite_reshaped)
+```
+
+### No coverage threshold, what is mean % methylated and how many loci are there?
+
+```{r}
+meth_unite_reshaped %>% 
+  group_by(sample) %>%
+  summarize(mean = mean(percMeth), nloci = n())
+```
+
+### 5x coverage, what is mean % methylated and how many loci are there?
+
+```{r}
+meth_unite_reshaped %>% 
+  filter(coverage>=5) %>% 
+  group_by(sample) %>%
+  summarize(mean = mean(percMeth,), nloci = n())
+```
+### 10x coverage, what is mean % methylated and how many loci are there?
+
+```{r}
+meth_unite_reshaped %>% 
+  filter(coverage>=10) %>% 
+  group_by(sample) %>%
+  summarize(mean = mean(percMeth), nloci = n())
+```
+
+### What is mean % methylated with 15x coverage?
+
+```{r}
+meth_unite_reshaped %>% 
+  filter(coverage>=15) %>% 
+  group_by(sample) %>%
+  summarize(mean = mean(percMeth), n = n())
+```
+
+### Generate CpG methylation histograms after filtering for coverage
+
+### Filter out loci where coverage is less than 5x or greater than 100x. 
+
+```{r}
+MiSeq_5x=filterByCoverage(myobj_MiSeq,lo.count=5,lo.perc=NULL,
+                                      hi.count=100,hi.perc=NULL)
+save(MiSeq_5x, file="../qc-processing/MiSeq-QC/MiSeq_5x")
+```
+
+### Now look at CpG methylation after filtering for 5x coverage 
+
+```{r}
+for (i in 1:20) {
+getMethylationStats(MiSeq_5x[[i]],plot=T,both.strands=TRUE)
+  mtext(paste("Sample", i, sep=" "), side=3, line = -6)
+}
+```
+
+### Filter out loci where coverage is less than 10x or greater than 100x. 
+
+```{r}
+MiSeq_10x=filterByCoverage(myobj_MiSeq,lo.count=10,lo.perc=NULL,
+                                      hi.count=100,hi.perc=NULL)
+save(MiSeq_10x, file="../qc-processing/MiSeq-QC/MiSeq_10x")
+```
+
+### Now look at CpG methylation after filtering for 10x coverage 
+
+```{r}
+for (i in 1:20) {
+getMethylationStats(MiSeq_10x[[i]],plot=T,both.strands=TRUE)
+  mtext(paste("Sample", i, sep=" "), side=3, line = -6)
+}
+```
+
+### Out of interest, do cluster analysis 
+
+```{r}
+clusterSamples(meth_unite, dist="correlation", method="ward", plot=TRUE)
+```
+
+```{r}
+PCASamples(meth_unite)
+```
+
+
