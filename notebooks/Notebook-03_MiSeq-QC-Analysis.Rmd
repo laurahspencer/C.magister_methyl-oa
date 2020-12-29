@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Load libraries
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
-list.of.packages <- c("tidyverse", "reshape2", "here", "methylKit", "ggforce", "matrixStats", "Pstat", "viridis", "plotly", "readr", "GenomicRanges", "vegan", "factoextra") #add new libraries here 
+list.of.packages <- c("tidyverse", "reshape2", "here", "methylKit", "ggforce", "matrixStats", "Pstat", "viridis", "plotly", "readr", "GenomicRanges", "vegan", "factoextra", "PerformanceAnalytics", "corrplot") #add new libraries here 
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -72,33 +72,86 @@ file.list=list("/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/b
 summary <- read_delim(file="../qc-processing/MiSeq-QC/mbdall.txt", delim="\t") %>%
   arrange(sample_mbd) %>% filter(sample_mbd != "NA")
 head(summary)
-
-as.numeric(as.factor(summary$treatment_high_lowCO2))
 ```
-
-#### The following command reads sorted BAM files and calls methylation percentage per base, and creates a methylRaw object for CpG methylation. It also assigns minimum coverage of 2x and the treatments (in this case, the CO2 treatment)
+### investigate possible factors influencing low %CpGmeth 
 
 ```{r}
+cor(summary %>% dplyr::select_if(is.numeric)) %>% corrplot(tl.cex=.45) 
+```
+#### Look closer at factors that correlate with CpGs_Meth (dark(ish) blue dots)
+
+```{r}
+chart.Correlation(summary %>% 
+                    select(CpGs_Meth, library_bioanlyzer_mean_fragment_size_bp, qubit_concentration_ng.uL,
+                           Total_Reads, Aligned_Reads, perc_totalread_unique, CHHs_Meth), 
+                  histogram=F, pch=19)
+```
+#### Plot meth ~ fragment size (bioanalyzer)
+
+```{r}
+ggplot(summary, 
+                aes(x=library_bioanlyzer_mean_fragment_size_bp, y=CpGs_Meth, 
+                    label=sample_mbd, color=Low_CpGmeth)) + 
+           geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
+           geom_text(aes(label=sample_mbd), vjust = -0.8)
+```
+
+#### Plot meth ~ Total Read
+
+```{r}
+ggplot(summary, 
+                aes(x=Total_Reads, y=CpGs_Meth, 
+                    label=sample_mbd, color=Low_CpGmeth)) + 
+           geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
+           geom_text(aes(label=sample_mbd), vjust = -0.8)
+```
+
+#### Plot meth ~ Aligned Reads
+
+```{r}
+ggplot(summary, 
+                aes(x=Aligned_Reads, y=CpGs_Meth, 
+                    label=sample_mbd, color=Low_CpGmeth)) + 
+           geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
+           geom_text(aes(label=sample_mbd), vjust = -0.8)
+```
+
+#### Plot meth ~ total reads that are unique
+
+```{r}
+ggplot(summary, 
+                aes(x=perc_totalread_unique, y=CpGs_Meth, 
+                    label=sample_mbd, color=Low_CpGmeth)) + 
+           geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
+           geom_text(aes(label=sample_mbd), vjust = -0.8)
+```
+
+#### Plot meth ~ CHH methylation 
+
+```{r}
+ggplot(summary, 
+                aes(x=CHHs_Meth, y=CpGs_Meth, 
+                    label=sample_mbd, color=Low_CpGmeth)) + 
+           geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
+           geom_text(aes(label=sample_mbd), vjust = -0.8)
+```
+#### The following command reads sorted BAM files and calls methylation percentage per base, and creates a methylRaw object for CpG methylation. It also assigns minimum coverage of 2x and the treatments (in this case, the CO2 treatment)
+
+```{r, cache=TRUE, eval=FALSE}
 myobj_MiSeq = processBismarkAln(location = file.list, sample.id = list("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18", "19", "20"), assembly = "pilon_scaffolds.fasta", read.context="CpG", mincov=2, treatment = as.numeric(as.factor(summary$treatment_high_lowCO2)))
 ```
 
 #### Save the MethylKit object; re-doing the previous step is memory/time intensive, so best to use the saved object moving forward. 
 
 ```{r}
-getwd()
-save(myobj_MiSeq, file = "../qc-processing/MiSeq-QC/myobj_MiSeq") 
-```
-
-#### compress MethylKit object, if desired 
-
-```{bash}
-#zip ../analyses/myobj_MiSeq.zip ../analyses/myobj_MiSeq
+#getwd()
+#save(myobj_MiSeq, file = "../qc-processing/MiSeq-QC/myobj_MiSeq") 
 ```
 
 #### Load object if needed 
 
 ```{r}
-#load("../qc-processing/MiSeq-QC/myobj_MiSeq")
+load("../qc-processing/MiSeq-QC/myobj_MiSeq")
 ```
 
 #### What does the resulting object look like? 
@@ -135,7 +188,7 @@ meth_unite=methylKit::unite(myobj_MiSeq, destrand=TRUE, min.per.group=1L)
 
 ### Reshape data to do various filtering and calculations 
 
-```{r}
+```{r, cache=TRUE, eval=FALSE}
 meth_unite_reshaped <- melt(data=meth_unite, id=c("chr", "start", "end", "strand"), value.name = "count") %>%
  tidyr::separate(col = "variable" , into = c("variable", "sample"), sep = "(?<=[a-zA-Z])\\s*(?=[0-9])") %>%
   dcast(chr+start+end+strand+sample ~  variable) %>%
@@ -143,6 +196,12 @@ meth_unite_reshaped <- melt(data=meth_unite, id=c("chr", "start", "end", "strand
   mutate(percMeth = 100*(numCs/coverage)) %>% 
   mutate(sample=as.numeric(sample))
 
+#save(meth_unite_reshaped, file = "../qc-processing/MiSeq-QC/meth_unite_reshaped") 
+```
+
+```{r}
+# Load reshaped object if needed
+load(file = "../qc-processing/MiSeq-QC/meth_unite_reshaped") 
 head(meth_unite_reshaped)
 ```
 

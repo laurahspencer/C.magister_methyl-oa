@@ -1,10 +1,4 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 tidyverse
 ggplot2
 tibble
@@ -16,8 +10,6 @@ stringr
 forcats
 reshape2
 here
-stats4
-parallel
 BiocGenerics
 S4Vectors
 IRanges
@@ -34,3 +26,7 @@ permute
 lattice
 vegan
 factoextra
+zoo
+xts
+PerformanceAnalytics
+corrplot
