@@ -113,9 +113,13 @@ summary2.0 <- read_delim(file="../qc-processing/MiSeq-QC/mbd_key.txt", delim="\t
   right_join(
     read_delim(file="../qc-processing/MiSeq-QC/bismark-genome2.0/bismark_summary_report.txt", delim="\t") %>% mutate(File = str_replace_all(File, '_.*', "")), 
     by=c("sample"="File")) %>%
-  rename(Total_Reads=`Total Reads`, Aligned_Reads=`Aligned Reads`, Unaligned_Reads=`Unaligned Reads`, Ambiguously_Aligned_Reads=`Ambiguously Aligned Reads`, 
-         Unique_reads=`Unique Reads (remaining)`, CpGs_Meth=`Methylated CpGs`, CHGs_Meth=`Methylated chgs`, CHHs_Meth=`Methylated CHHs`, Low_CpGmeth=low_cp_gmeth) %>%
-  mutate(perc_totalread_unique=Unique_reads/Total_Reads)
+  rename(Total_Reads=`Total Reads`, Aligned_Reads=`Aligned Reads`, Unaligned_Reads=`Unaligned Reads`, 
+         Ambiguously_Aligned_Reads=`Ambiguously Aligned Reads`, 
+         Unique_reads=`Unique Reads (remaining)`, Low_CpGmeth=low_cp_gmeth) %>%
+  mutate(perc_totalread_unique=Unique_reads/Total_Reads, 
+         CpGs_Meth=100*`Methylated CpGs`/(`Methylated CpGs`+`Unmethylated CpGs`), 
+         CHGs_Meth=100*`Methylated chgs`/(`Methylated chgs`+`Unmethylated chgs`), 
+         CHHs_Meth=100*`Methylated CHHs`/(`Methylated CHHs`+`Unmethylated CHHs`))
 ```
 
 
