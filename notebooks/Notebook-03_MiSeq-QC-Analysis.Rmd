@@ -1,8 +1,17 @@
 ---
-title: "MiSeq-MethylKit"
+title: "MiSeq-MethylKit-genome2.0"
 author: "Laura H Spencer"
 date: "12/27/2020"
 output: html_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        xfun::sans_ext(input), '-', Sys.Date(), '.html'
+      ),
+      envir = globalenv()
+    )
+  })
 ---
 
 ```{r setup, include=FALSE}
@@ -41,29 +50,55 @@ getwd()
 
 ### IMPORTANT NOTE: The location of these files depends on where the user saved them. I (Laura) used an external hard drive. 
 
-Files were transferred from Hyak on December 27th, 2020 using `rsync`. 
+
+These files are from the original analysis using the old genome, and were transferred from Hyak on December 27th, 2020 using `rsync`. 
 
 ```{r}
-file.list=list("/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-06_S1_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-14_S2_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-22_S3_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-38_S4_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-04_S5_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-15_S6_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-33_S7_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-01_S8_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-06_S9_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-21_S10_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-24_S11_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-06_S12_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-11_S13_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-24_S14_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-02_S15_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-13_S16_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-28_S17_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-01_S18_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-08_S19_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
-               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-11_S20_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam")
+# file.list=list("/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-06_S1_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-14_S2_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-22_S3_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH01-38_S4_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-04_S5_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-15_S6_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH03-33_S7_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-01_S8_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-06_S9_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-21_S10_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH05-24_S11_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-06_S12_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-11_S13_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH07-24_S14_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-02_S15_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-13_S16_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH09-28_S17_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-01_S18_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-08_S19_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+#                "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark/CH10-11_S20_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam")
+```
+
+These files are from the re-run using the new genome, and transferred from Hyak on February 3rd, 2021 using `rsync`. 
+
+```{r}
+file.list=list("/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH01-06_S1_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH01-14_S2_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH01-22_S3_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH01-38_S4_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH03-04_S5_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH03-15_S6_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH03-33_S7_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH05-01_S8_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH05-06_S9_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH05-21_S10_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH05-24_S11_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH07-06_S12_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH07-11_S13_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH07-24_S14_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH09-02_S15_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH09-13_S16_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH09-28_S17_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH10-01_S18_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH10-08_S19_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam",
+               "/Volumes/Bumblebee/C.magister_methyl-oa/qc-processing/MiSeq-QC/bismark-genome2.0/CH10-11_S20_L001_R1_001_val_1_bismark_bt2_pe.deduplicated.sorted.bam")
 ```
 
 #### Read in MiSeq bismark summary with sample treatment info 
