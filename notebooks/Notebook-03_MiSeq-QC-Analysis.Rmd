@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Load libraries
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
-list.of.packages <- c("tidyverse", "reshape2", "here", "methylKit", "ggforce", "matrixStats", "Pstat", "viridis", "plotly", "readr", "GenomicRanges", "vegan", "factoextra", "PerformanceAnalytics", "corrplot") #add new libraries here 
+list.of.packages <- c("tidyverse", "reshape2", "here", "methylKit", "ggforce", "matrixStats", "Pstat", "viridis", "plotly", "readr", "GenomicRanges", "vegan", "factoextra", "PerformanceAnalytics", "corrplot", "janitor") #add new libraries here 
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -43,8 +43,6 @@ sessionInfo()
 ```{r}
 getwd()
 ```
-
-### Download files from `gannet` 
 
 ### Create list of all bismark data files, which have reads that are already trimmed and aligned. These BAM files are also sorted and indexed. 
 
@@ -108,23 +106,36 @@ summary <- read_delim(file="../qc-processing/MiSeq-QC/mbdall.txt", delim="\t") %
   arrange(sample_mbd) %>% filter(sample_mbd != "NA")
 head(summary)
 ```
+### Read in Bismark summary stats from the genome2.0 alignment and merge with library prep stats 
+
+```{r}
+summary2.0 <- read_delim(file="../qc-processing/MiSeq-QC/mbd_key.txt", delim="\t") %>% clean_names() %>%
+  right_join(
+    read_delim(file="../qc-processing/MiSeq-QC/bismark-genome2.0/bismark_summary_report.txt", delim="\t") %>% mutate(File = str_replace_all(File, '_.*', "")), 
+    by=c("sample"="File")) %>%
+  rename(Total_Reads=`Total Reads`, Aligned_Reads=`Aligned Reads`, Unaligned_Reads=`Unaligned Reads`, Ambiguously_Aligned_Reads=`Ambiguously Aligned Reads`, 
+         Unique_reads=`Unique Reads (remaining)`, CpGs_Meth=`Methylated CpGs`, CHGs_Meth=`Methylated chgs`, CHHs_Meth=`Methylated CHHs`, Low_CpGmeth=low_cp_gmeth) %>%
+  mutate(perc_totalread_unique=Unique_reads/Total_Reads)
+```
+
+
 ### investigate possible factors influencing low %CpGmeth 
 
 ```{r}
-cor(summary %>% dplyr::select_if(is.numeric)) %>% corrplot(tl.cex=.45) 
+cor(summary2.0 %>% dplyr::select_if(is.numeric)) %>% corrplot(tl.cex=.45) 
 ```
 #### Look closer at factors that correlate with CpGs_Meth (dark(ish) blue dots)
 
 ```{r}
-chart.Correlation(summary %>% 
-                    select(CpGs_Meth, library_bioanlyzer_mean_fragment_size_bp, qubit_concentration_ng.uL,
+chart.Correlation(summary2.0 %>% 
+                    select(CpGs_Meth, library_bioanlyzer_mean_fragment_size_bp, qubit_concentration_ng_u_l,
                            Total_Reads, Aligned_Reads, perc_totalread_unique, CHHs_Meth), 
-                  histogram=F, pch=19)
+                  histogram=F, pch=19) 
 ```
 #### Plot meth ~ fragment size (bioanalyzer)
 
 ```{r}
-ggplot(summary, 
+ggplot(summary2.0, 
                 aes(x=library_bioanlyzer_mean_fragment_size_bp, y=CpGs_Meth, 
                     label=sample_mbd, color=Low_CpGmeth)) + 
            geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
@@ -134,7 +145,7 @@ ggplot(summary,
 #### Plot meth ~ Total Read
 
 ```{r}
-ggplot(summary, 
+ggplot(summary2.0, 
                 aes(x=Total_Reads, y=CpGs_Meth, 
                     label=sample_mbd, color=Low_CpGmeth)) + 
            geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
@@ -144,7 +155,7 @@ ggplot(summary,
 #### Plot meth ~ Aligned Reads
 
 ```{r}
-ggplot(summary, 
+ggplot(summary2.0, 
                 aes(x=Aligned_Reads, y=CpGs_Meth, 
                     label=sample_mbd, color=Low_CpGmeth)) + 
            geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
@@ -154,7 +165,7 @@ ggplot(summary,
 #### Plot meth ~ total reads that are unique
 
 ```{r}
-ggplot(summary, 
+ggplot(summary2.0, 
                 aes(x=perc_totalread_unique, y=CpGs_Meth, 
                     label=sample_mbd, color=Low_CpGmeth)) + 
            geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
@@ -164,7 +175,7 @@ ggplot(summary,
 #### Plot meth ~ CHH methylation 
 
 ```{r}
-ggplot(summary, 
+ggplot(summary2.0, 
                 aes(x=CHHs_Meth, y=CpGs_Meth, 
                     label=sample_mbd, color=Low_CpGmeth)) + 
            geom_point(size=3) + scale_color_manual(values=c("black", "red")) +
@@ -173,7 +184,7 @@ ggplot(summary,
 #### The following command reads sorted BAM files and calls methylation percentage per base, and creates a methylRaw object for CpG methylation. It also assigns minimum coverage of 2x and the treatments (in this case, the CO2 treatment)
 
 ```{r, cache=TRUE, eval=FALSE}
-myobj_MiSeq = processBismarkAln(location = file.list, sample.id = list("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18", "19", "20"), assembly = "pilon_scaffolds.fasta", read.context="CpG", mincov=2, treatment = as.numeric(as.factor(summary$treatment_high_lowCO2)))
+myobj_MiSeq = processBismarkAln(location = file.list, sample.id = list("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18", "19", "20"), assembly = "pilon_scaffolds.fasta", read.context="CpG", mincov=2, treatment = as.numeric(as.factor(summary2.0$treatment_high_low_co2)))
 ```
 
 #### Save the MethylKit object; re-doing the previous step is memory/time intensive, so best to use the saved object moving forward. 
